@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-11T17:41:50.917060+00:00",
+  "passed": true,
+  "main_tex": "main.tex",
+  "project_root": "C:\\Users\\Sunuo\\Desktop\\26数模C\\paper",
+  "source_sha256": "135f55df464b6677aae807b73ad10fe774d1358ab3dfccb55ff6030f8e826b93",
+  "compiled_source_sha256": "135f55df464b6677aae807b73ad10fe774d1358ab3dfccb55ff6030f8e826b93",
+  "post_build_source_sha256": "135f55df464b6677aae807b73ad10fe774d1358ab3dfccb55ff6030f8e826b93",
+  "pdf_sha256": "1d909bb597fe911e1f5e2e987a99204495f4ebd8f010b3179e32cf8b1eaae8cc",
+  "project_manifest_sha256": null,
+  "engine": "xelatex",
+  "tools": {
+    "latexmk": {
+      "path": "C:\\texlive\\2026\\bin\\windows\\latexmk.EXE",
+      "version": "perl: warning: Setting locale failed."
+    },
+    "xelatex": {
+      "path": "C:\\texlive\\2026\\bin\\windows\\xelatex.EXE",
+      "version": "XeTeX 3.141592653-2.6-0.999998 (TeX Live 2026)"
+    }
+  },
+  "commands": [
+    {
+      "command": [
+        "C:\\texlive\\2026\\bin\\windows\\latexmk.EXE",
+        "-norc",
+        "-gg",
+        "-xelatex",
+        "-e",
+        "$xelatex = 'xelatex -no-shell-escape %O %S'",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-file-line-error",
+        "-outdir=build",
+        "main.tex"
+      ],
+      "cwd": "C:\\Users\\Sunuo\\Desktop\\26数模C\\paper",
+      "returncode": 0,
+      "duration_seconds": 12.908
+    }
+  ],
+  "warnings": [],
+  "allowed_warnings": [],
+  "warning_override": {
+    "patterns": [],
+    "reason": null
+  },
+  "issues": [],
+  "reproduce": "C:\\Users\\Sunuo\\AppData\\Local\\Programs\\Python\\Python313\\python.exe C:\\Users\\Sunuo\\.agents\\skills\\math-modeling\\tools\\latex\\scripts\\latex_paper.py build C:\\Users\\Sunuo\\Desktop\\26数模C\\paper\\main.tex --engine xelatex --timeout 180 --publish C:\\Users\\Sunuo\\Desktop\\26数模C\\main_updated.pdf --overwrite"
+}
