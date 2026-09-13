@@ -1,3 +1,4 @@
+% !TEX root = main.tex
 % !TeX program = xelatex
 \documentclass[UTF8,a4paper,12pt,fontset=fandol]{ctexart}
 \usepackage[left=2.5cm,right=2.5cm,top=2.4cm,bottom=2.4cm]{geometry}
@@ -15,7 +16,8 @@
 \usepackage{chngcntr}
 
 \hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue}
-\graphicspath{{../论文图片/}}
+% 论文图像统一放在 paper/figures 中，使本目录可独立编译与提交。
+\graphicspath{{figures/}}
 \captionsetup{font=small,labelsep=quad}
 \captionsetup[table]{position=top}
 \renewcommand{\figurename}{图}
@@ -26,7 +28,8 @@
     textfont=bf
 }
 \captionsetup[figure]{labelfont=bf,textfont=bf}
-\setstretch{1.22}
+% 适度收紧正文行距，保持可读性并减少分页碎片
+\setstretch{1.12}
 \raggedbottom
 \setlength{\parindent}{2em}
 \setlength{\parskip}{0pt}
@@ -35,7 +38,12 @@
 \fancyhf{}
 \cfoot{\thepage}
 \renewcommand{\headrulewidth}{0pt}
-\renewcommand{\arraystretch}{1.18}
+\renewcommand{\arraystretch}{1.05}
+\setlength{\textfloatsep}{6pt plus 2pt minus 2pt}
+\setlength{\intextsep}{6pt plus 2pt minus 2pt}
+\setlength{\floatsep}{5pt plus 2pt minus 2pt}
+\ctexset{section={beforeskip=1.2ex plus .2ex minus .1ex, afterskip=.7ex plus .1ex minus .1ex},
+  subsection={beforeskip=.9ex plus .1ex minus .1ex, afterskip=.4ex plus .1ex minus .1ex}}
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \newcolumntype{L}{>{\raggedright\arraybackslash}X}
 \newcommand{\dif}{\mathop{}\!\mathrm{d}}
@@ -62,7 +70,7 @@
   columns=fullflexible
 }
 
-\title{\heiti\bfseries 微网与外部电网电力调控策略优化的的研究}
+\title{\heiti\bfseries 微网与外部电网电力调控策略优化的研究}
 \author{}
 \date{}
 
@@ -119,6 +127,15 @@
 
 \textbf{问题4：}（1）将附件4的波动电价分别代入问题2的日前计划机制和问题3的滚动调整机制；（2）在相同供需条件下重新求解两类策略；（3）比较固定电价与波动电价下的成本、紧急购电及稳定性，并说明电价信息可得范围对结论的影响。\par
 
+\subsection{我们的工作}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{图2_微网与外部电网购电储能协同调度总体流程.png}
+    \caption{微网与外部电网购电—储能协同调度总体流程}
+    \label{fig:overall-workflow}
+\end{figure}
+
 \section{问题分析}
 
 \subsection{总体思路}
@@ -127,7 +144,7 @@
 
 \subsection{问题一分析}
 
-关键矛盾是：降低当前购电费用与保留后续可用储能之间的跨时段权衡。首先统一功率、电量与时间索引，计算并识别出净负荷及光伏富余区间；其次建立购电、充放电和储能状态变量，以二元变量保证充放电状态互斥，并施加容量、功率及单日内首末储能相等的约束；最后先最小化购电费，通过约束回代和线性松弛下界检验方案。
+关键矛盾是：降低当前购电费用与保留后续可用储能之间的跨时段权衡。首先统一功率、电量与时间索引，计算并识别出净负荷及光伏富余区间；其次建立购电、充放电和储能状态变量，以二元变量保证充放电状态互斥，并施加容量、功率及单日内首末储能相等的约束；最后先最小化购电费，再在购电费不变的情况下最小化充放电次数，通过约束回代和线性松弛下界检验方案。
 
 \subsection{问题二分析}
 
@@ -301,7 +318,7 @@ x_{d,t}=X^P_{d,t}\Delta t,\qquad \Delta t=\frac{1}{6}\ \mathrm{h}.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.94\textwidth]{图2_净负荷分布与工作日差异.png}
+    \includegraphics[width=0.94\textwidth]{图3_净负荷分布与工作日差异.png}
     \caption{净负荷分布与工作日差异}
     \label{fig:data-netload-workday}
 \end{figure}
@@ -310,7 +327,7 @@ x_{d,t}=X^P_{d,t}\Delta t,\qquad \Delta t=\frac{1}{6}\ \mathrm{h}.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.94\textwidth]{图3_主要变量月度变化与相关关系.png}
+    \includegraphics[width=0.94\textwidth]{图4_主要变量月度变化与相关关系.png}
     \caption{主要变量月度变化与相关关系}
     \label{fig:data-month-corr}
 \end{figure}
@@ -375,7 +392,7 @@ J_d(\alpha)=\overline C_d(\alpha)+0.2\,\mathrm{CVaR}_{0.95,d}(\alpha)
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.98\textwidth]{图4_问题一解题思路流程图.png}
+    \includegraphics[width=0.98\textwidth]{图5_问题一解题思路流程图.png}
     \caption{问题一解题思路流程图}
     \label{fig:q1-solution-flow}
 \end{figure}
@@ -484,14 +501,14 @@ SOC范围/kWh & $[1200,10800]$ & --\\
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.92\textwidth]{图5_问题一储能状态与充放电行为.png}
+    \includegraphics[width=0.92\textwidth]{图6_问题一储能状态与充放电行为.png}
     \caption{问题一储能状态与充放电行为}
     \label{fig:q1-soc-actions}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.92\textwidth]{图6_问题一有无储能购电策略对比.png}
+    \includegraphics[width=0.92\textwidth]{图7_问题一有无储能购电策略对比.png}
     \caption{问题一有无储能购电策略对比}
     \label{fig:q1-storage-compare}
 \end{figure}
@@ -502,7 +519,7 @@ SOC范围/kWh & $[1200,10800]$ & --\\
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.91\textwidth]{图7_问题一储能效率敏感性.png}
+    \includegraphics[width=0.91\textwidth]{图8_问题一储能效率敏感性.png}
     \caption{问题一储能效率敏感性}
     \label{fig:q1-efficiency}
 \end{figure}
@@ -519,7 +536,7 @@ SOC范围/kWh & $[1200,10800]$ & --\\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.98\textwidth]{图8_问题二求解流程图.jpg}
+    \includegraphics[width=0.98\textwidth]{图9_问题二求解流程图.jpg}
     \caption{问题二求解流程图}
     \label{fig:q2-solution-flow}
 \end{figure}
@@ -534,7 +551,7 @@ SOC范围/kWh & $[1200,10800]$ & --\\
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.93\textwidth]{图9_实际净负荷与日前预测误差.png}
+    \includegraphics[width=0.93\textwidth]{图10_实际净负荷与日前预测误差.png}
     \caption{实际净负荷与日前预测误差}
     \label{fig:q2-forecast-error}
 \end{figure}
@@ -604,7 +621,7 @@ SOC范围/kWh & $[1200,10800]$ & 正式评价天数 & 334\\
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.93\textwidth]{图10_动态分位数与应急购电月度分布.png}
+    \includegraphics[width=0.93\textwidth]{图11_动态分位数与应急购电月度分布.png}
     \caption{动态分位数与应急购电月度分布}
     \label{fig:q2-alpha-emergency}
 \end{figure}
@@ -631,7 +648,7 @@ SOC范围/kWh & $[1200,10800]$ & 正式评价天数 & 334\\
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.92\textwidth]{图11_时间顺序样本外预测检验.png}
+    \includegraphics[width=0.92\textwidth]{图12_时间顺序样本外预测检验.png}
     \caption{时间顺序样本外预测检验}
     \label{fig:forecast-validation}
 \end{figure}
@@ -650,7 +667,7 @@ SOC范围/kWh & $[1200,10800]$ & 正式评价天数 & 334\\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.98\textwidth]{图12_问题三求解流程图.jpg}
+    \includegraphics[width=0.98\textwidth]{图13_问题三求解流程图.jpg}
     \caption{问题三求解流程图}
     \label{fig:q3-solution-flow}
 \end{figure}
@@ -671,7 +688,7 @@ SOC范围/kWh & $[1200,10800]$ & 正式评价天数 & 334\\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.96\textwidth]{图13_四时点滚动优化的信息更新机制.png}
+    \includegraphics[width=0.96\textwidth]{图14_四时点滚动优化的信息更新机制.png}
     \caption{四时点滚动优化的执行区间与状态回写机制}
     \label{fig:q3-rolling-mechanism}
 \end{figure}
@@ -727,7 +744,7 @@ C^{\mathrm{tot}}_3=\sum_{d,t}\left[\pi_tg^0_{d,t}+\pi_t(1.5u_{d,t}-0.5v_{d,t})+5
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.91\textwidth]{图14_日前计划与四时点滚动调整的典型日对比.png}
+    \includegraphics[width=0.91\textwidth]{图15_日前计划与四时点滚动调整的典型日对比.png}
     \caption{日前计划与四时点滚动调整的典型日对比}
     \label{fig:q3-typical-day}
 \end{figure}
@@ -760,7 +777,7 @@ C^{\mathrm{tot}}_3=\sum_{d,t}\left[\pi_tg^0_{d,t}+\pi_t(1.5u_{d,t}-0.5v_{d,t})+5
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.91\textwidth]{图15_不同预报更新频率下的信息价值比较.png}
+    \includegraphics[width=0.91\textwidth]{图16_不同预报更新频率下的信息价值比较.png}
     \caption{不同预报更新频率下的信息价值比较}
     \label{fig:q3-information-value}
 \end{figure}
@@ -779,14 +796,14 @@ C^{\mathrm{tot}}_3=\sum_{d,t}\left[\pi_tg^0_{d,t}+\pi_t(1.5u_{d,t}-0.5v_{d,t})+5
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.98\textwidth]{图16_问题四求解流程图.png}
+    \includegraphics[width=0.98\textwidth]{图17_问题四求解流程图.png}
     \caption{问题四求解流程图}
     \label{fig:q4-solution-flow}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.93\textwidth]{图17_固定电价与波动电价分布对比.png}
+    \includegraphics[width=0.93\textwidth]{图18_固定电价与波动电价分布对比.png}
     \caption{固定电价与波动电价分布对比}
     \label{fig:q4-price-comparison}
 \end{figure}
@@ -831,7 +848,7 @@ C^{\mathrm{tot}}_3=\sum_{d,t}\left[\pi_tg^0_{d,t}+\pi_t(1.5u_{d,t}-0.5v_{d,t})+5
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.92\textwidth]{图18_四种调度策略的月度成本比较.png}
+    \includegraphics[width=0.92\textwidth]{图19_四种调度策略的月度成本比较.png}
     \caption{四种调度策略的月度成本比较}
     \label{fig:q4-monthly-cost}
 \end{figure}
@@ -840,7 +857,7 @@ C^{\mathrm{tot}}_3=\sum_{d,t}\left[\pi_tg^0_{d,t}+\pi_t(1.5u_{d,t}-0.5v_{d,t})+5
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.91\textwidth]{图19_波动电价下滚动策略的典型日调度.png}
+    \includegraphics[width=0.91\textwidth]{图20_波动电价下滚动策略的典型日调度.png}
     \caption{波动电价下滚动策略的典型日调度}
     \label{fig:q4-typical-day}
 \end{figure}
@@ -849,7 +866,7 @@ C^{\mathrm{tot}}_3=\sum_{d,t}\left[\pi_tg^0_{d,t}+\pi_t(1.5u_{d,t}-0.5v_{d,t})+5
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.88\textwidth]{图20_不同问题与调度策略的全年总成本比较.png}
+    \includegraphics[width=0.88\textwidth]{图21_不同问题与调度策略的全年总成本比较.png}
     \caption{不同问题与调度策略的全年总成本比较}
     \label{fig:q234-total-cost}
 \end{figure}
@@ -949,6 +966,8 @@ C^{\mathrm{tot}}_3=\sum_{d,t}\left[\pi_tg^0_{d,t}+\pi_t(1.5u_{d,t}-0.5v_{d,t})+5
 （4）问题四在当日波动价格路径0:00可见的条件下，日前策略总成本17148794.62元，四时点滚动策略16864403.38元，节约284391.24元、降低1.6584\%。价格波动通过改变充放电时点和计划裕度影响成本；若价格改为逐时发布，必须增加因果价格预测后重新求解。
 
 综合而言，现有数据条件下可优先采用“动态净负荷日前计划+四时点滚动调整+跨日连续SOC”的策略，并把总成本而非单一预测误差或紧急购电量作为决策标准。同时应保留对预测精度、终端效应、价格可见性和极端天气的限定，避免把本次回测结果外推为无条件收益保证。
+
+本参赛队在竞赛过程中使用了 AI 工具，主要用于代码编写与调试、论文语言润色与翻译，详细使用情况见支撑材料
 
 \begin{thebibliography}{99}
 \bibitem{economic2022}
