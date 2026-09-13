@@ -1,10 +1,11 @@
 # Fdb version 4
-["xdvipdfmx"] 1789276066.67382 "main.xdv" "main.pdf" "main" 1789276078.89791 0
-  "main.xdv" 1789276066 374388 ee04e53364b1200ab6bb8a5aa9c04ddb "xelatex"
+["xdvipdfmx"] 1789279611.6555 "build/main.xdv" "build/main.pdf" "build/main" 1789279624.06233 0
+  "build/main.xdv" 1789279611 375820 50d2addf6317fb698d0b82c05325327c "xelatex"
   (generated)
-  "main.pdf"
+  "build/main.pdf"
   (rewritten before read)
-["xelatex"] 1789276060.45273 "main.tex" "main.xdv" "main" 1789276078.878 0
+["xelatex"] 1789279605.4258 "main.tex" "build/main.xdv" "main" 1789279624.04115 0
+  "build/main.aux" 1789279611 19437 c320e36949c4e634a51908cf70c4389a "xelatex"
   "c:/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1784037290 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1784039460 1528 7e12f4c0fcf5a072cebdcfbfc610f54c ""
   "c:/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1784036420 1120 1e8878807317373affa7f7bba4cf2f6a ""
@@ -159,10 +160,9 @@
   "figures/图7_问题一有无储能购电策略对比.png" 1789218771 157142 c9f4bdb9e15c01f3a25838809d7ae4c4 ""
   "figures/图8_问题一储能效率敏感性.png" 1789218771 146699 ba4836aa9f65375313c1149a56ac000e ""
   "figures/图9_问题二求解流程图.jpg" 1789229517 253227 4b87515de1bc98b06d5934610698435d ""
-  "main.aux" 1789276066 19299 e4c509732c795f2171702221206139da "xelatex"
-  "main.tex" 1789276027 66273 76298c3c35df46d063c5644206e7d1b8 ""
+  "main.tex" 1789279558 66533 0b59a91468a9aa4c00818166fee45362 ""
   (generated)
-  "main.aux"
-  "main.log"
-  "main.xdv"
+  "build/main.aux"
+  "build/main.log"
+  "build/main.xdv"
   (rewritten before read)

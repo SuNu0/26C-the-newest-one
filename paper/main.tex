@@ -1,5 +1,4 @@
 % !TEX root = main.tex
-% !TeX program = xelatex
 \documentclass[UTF8,a4paper,12pt,fontset=fandol]{ctexart}
 \usepackage[left=2.5cm,right=2.5cm,top=2.4cm,bottom=2.4cm]{geometry}
 \usepackage{amsmath,amssymb,bm}
@@ -18,7 +17,7 @@
 \hypersetup{colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue}
 % 论文图像统一放在 paper/figures 中，使本目录可独立编译与提交。
 \graphicspath{{figures/}}
-\captionsetup{font=small,labelsep=quad}
+\captionsetup{font=small,labelsep=quad,skip=6pt}
 \captionsetup[table]{position=top}
 \renewcommand{\figurename}{图}
 \captionsetup[figure]{
@@ -39,9 +38,10 @@
 \cfoot{\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\arraystretch}{1.05}
-\setlength{\textfloatsep}{6pt plus 2pt minus 2pt}
-\setlength{\intextsep}{6pt plus 2pt minus 2pt}
-\setlength{\floatsep}{5pt plus 2pt minus 2pt}
+% 图表与正文、题注之间保留自然留白，避免版面过度压缩
+\setlength{\textfloatsep}{10pt plus 3pt minus 2pt}
+\setlength{\intextsep}{10pt plus 3pt minus 2pt}
+\setlength{\floatsep}{8pt plus 3pt minus 2pt}
 \ctexset{section={beforeskip=1.2ex plus .2ex minus .1ex, afterskip=.7ex plus .1ex minus .1ex},
   subsection={beforeskip=.9ex plus .1ex minus .1ex, afterskip=.4ex plus .1ex minus .1ex}}
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
@@ -85,9 +85,9 @@
 
 \textbf{针对问题一，}将一天划分为144个十分钟时段，以购电量、充放电量、弃光量和储能电量为决策变量，建立\textbf{光伏—储能联合优化调度模型}，并采用\textbf{混合整数线性规划}进行求解。在允许弃光且不向外部电网售电的条件下，模型得到的最优购电费用约为\textbf{35126.95元}，较无储能方案降低\textbf{26.90\%}，且各时段用电需求均得到满足，储能运行状态始终处于安全范围内。
 
-\textbf{针对问题二，}考虑预测误差对日前计划和紧急购电的影响，采用\textbf{严格因果的动态净负荷分位数预测方法}，并结合日前\textbf{混合整数规划模型}制定购电与储能计划。在固定电价条件下，通过在0.50--0.95分位数候选集中依据历史运行成本进行滚动选择，得到全年总成本为\textbf{16413518.08元}，紧急购电量为\textbf{622766.43千瓦时}。
+\textbf{针对问题二，}考虑预测误差对日前计划和紧急购电的影响，采用\textbf{严格因果的动态净负荷分位数预测方法}，并结合日前\textbf{混合整数规划模型}制定购电与储能计划。在固定电价条件下，通过在0.50--0.95分位数候选集中依据历史运行成本进行滚动选择，得到正式评价期总成本为\textbf{16413518.08元}，紧急购电量为\textbf{622766.43千瓦时}。
 
-\textbf{针对问题三，}采用\textbf{滚动时域优化方法}，利用0时、6时、12时和18时发布的最新预测信息，动态更新尚未执行的调度计划。在固定电价条件下，全年总成本为\textbf{16130891.40元}，较问题二降低\textbf{1.72\%}。进一步增加3时、9时、15时和21时的预测更新后，计算得到毛信息价值为\textbf{-71161.01元}，表明在当前运行机制下增加预测更新时间点并不能带来经济收益。
+\textbf{针对问题三，}采用\textbf{滚动时域优化方法}，利用0时、6时、12时和18时发布的最新预测信息，动态更新尚未执行的调度计划。在固定电价条件下，正式评价期总成本为\textbf{16130891.40元}，较问题二降低\textbf{1.72\%}。进一步增加3时、9时、15时和21时的预测更新后，计算得到毛信息价值为\textbf{-71161.01元}，表明在当前运行机制下增加预测更新时间点并不能带来经济收益。
 
 \textbf{针对问题四，}将附件4中的波动电价引入\textbf{日前计划与滚动调整双策略模型}，分别制定日前调度方案和实时滚动修正方案。结果表明，日前策略总成本为17148794.62元，滚动调整策略总成本为\textbf{16864403.38元}，较日前策略降低\textbf{1.66\%}；两种策略均满足供需平衡及储能运行约束，说明滚动调整策略能够更有效地利用最新预测信息和动态电价降低微网运行成本。
 
@@ -314,7 +314,7 @@ x_{d,t}=X^P_{d,t}\Delta t,\qquad \Delta t=\frac{1}{6}\ \mathrm{h}.
 \end{tabular}
 \end{table}
 
-前文图\ref{fig:pv-load-daily}显示了单日光伏、负荷与电价的错峰关系。全年统计进一步表明，平均负荷在9:10附近达到5914.68 kW，平均光伏在12:10达到7759.62 kW，平均净负荷则在17:40达到4918.77 kW；波动电价平均日内峰值出现在20:40。工作日日均负荷为114.77 MWh，非工作日为100.96 MWh，而两类日期的日均光伏均约57.1 MWh。图\ref{fig:data-netload-workday}以分布和原始日样本说明：工作日差异主要来自负荷而非光伏，日期类型应进入相似日筛选。
+前文图\ref{fig:pv-load-daily}显示了单日光伏、负荷与电价的错峰关系。正式评价期统计进一步表明，平均负荷在9:10附近达到5914.68 kW，平均光伏在12:10达到7759.62 kW，平均净负荷则在17:40达到4918.77 kW；波动电价平均日内峰值出现在20:40。工作日日均负荷为114.77 MWh，非工作日为100.96 MWh，而两类日期的日均光伏均约57.1 MWh。图\ref{fig:data-netload-workday}以分布和原始日样本说明：工作日差异主要来自负荷而非光伏，日期类型应进入相似日筛选。
 
 \begin{figure}[htbp]
     \centering
@@ -547,7 +547,7 @@ SOC范围/kWh & $[1200,10800]$ & --\\
 
 2025年发表于《中国电力》的研究利用共形分位数回归构造光伏功率预测区间，说明分位数方法能够在不预设固定概率分布的情况下刻画光伏预测不确定性\cite{gui2025quantile}。
 
-图\ref{fig:q2-forecast-error}给出按结果文件中的当日分位数重新构造的代表日预测和正式评价期误差分布。误差定义为实际净负荷减日前预测，正误差意味着潜在缺口。分布存在双侧尾部，说明单一固定裕度无法覆盖全年季节变化。
+图\ref{fig:q2-forecast-error}给出按结果文件中的当日分位数重新构造的代表日预测和正式评价期误差分布。误差定义为实际净负荷减日前预测，正误差意味着潜在缺口。分布存在双侧尾部，说明单一固定裕度无法覆盖正式评价期内的季节变化。
 
 \begin{figure}[htbp]
     \centering
@@ -602,7 +602,7 @@ SOC范围/kWh & $[1200,10800]$ & 正式评价天数 & 334\\
 \end{tabular}
 \end{table}
 
-表\ref{tab:q2-alpha}显示动态分位数并非长期停留在单一高位：平均值为0.8076，中位数为0.85，全年发生11次切换；0.50和0.95分别使用61天和125天。较高分位数增加计划裕度但也可能扩大剩余电量，较低分位数减少计划采购却暴露于高价应急风险，最优方向取决于近期负荷、光伏、价格和尾部成本的联合表现。
+表\ref{tab:q2-alpha}显示动态分位数并非长期停留在单一高位：平均值为0.8076，中位数为0.85，正式评价期内发生11次切换；0.50和0.95分别使用61天和125天。较高分位数增加计划裕度但也可能扩大剩余电量，较低分位数减少计划采购却暴露于高价应急风险，最优方向取决于近期负荷、光伏、价格和尾部成本的联合表现。
 
 \begin{table}[htbp]
 \centering
@@ -716,7 +716,7 @@ C^{\mathrm{tot}}_3=\sum_{d,t}\left[\pi_tg^0_{d,t}+\pi_t(1.5u_{d,t}-0.5v_{d,t})+5
 
 \subsection{滚动策略结果与成本解释}
 
-表\ref{tab:q3-results}将问题三与问题二放在同一口径下比较。滚动策略总成本为16130891.40元，比日前策略减少282626.68元、降幅1.72\%。紧急购电量反而由622766.43 kWh增加到879414.55 kWh；但滚动方案把计划购电费降低1556881.39元，扣除434599.02元调整成本和新增的紧急购电费后，仍实现净节约。因此只比较紧急购电量会得出错误结论，必须同时核算计划、调整和补救费用。
+表\ref{tab:q3-results}将问题三与问题二放在同一口径下比较。滚动策略总成本为16130891.40元，比日前策略减少282626.68元、降幅1.72\%。紧急购电量反而由622766.43 kWh增加到879414.55 kWh；但滚动方案把计划购电费降低约1556881.39元，扣除434599.02元调整成本和新增的紧急购电费后，仍实现净节约。因此只比较紧急购电量会得出错误结论，必须同时核算计划、调整和补救费用。
 
 \begin{table}[htbp]
 \centering
@@ -756,7 +756,7 @@ C^{\mathrm{tot}}_3=\sum_{d,t}\left[\pi_tg^0_{d,t}+\pi_t(1.5u_{d,t}-0.5v_{d,t})+5
 \mathrm{VOI}_{8\mid4}=C^{\mathrm{tot}}_{4\text{点}}-C^{\mathrm{tot}}_{8\text{点}}.
 \label{eq:voi}
 \end{equation}
-表\ref{tab:q3-voi}和图\ref{fig:q3-information-value}显示，八时点代理成本为16202052.41元，比四时点高71161.01元，故毛信息价值为负，比例为$-0.4411\%$。逐日比较中仅125天为正、209天为负。更多更新可能触发额外调整，却未必带来同等质量的增量预测；预测质量、调整费用和调度响应共同决定信息价值，更新次数本身不能保证降本。
+表\ref{tab:q3-voi}和图\ref{fig:q3-information-value}显示，八时点代理成本为16202052.41元，比四时点高71161.01元，故毛信息价值为负，比例为$-0.4411\%$。334 个正式评价日中，125 天信息价值为正，209 天为负，没有恰好为零的日期。更多更新可能触发更多额外调整，却未必带来同等质量的增量预测；预测质量、调整费用和调度响应共同决定信息价值，更新次数本身不能保证降本增效。
 
 \begin{table}[htbp]
 \centering
@@ -844,7 +844,7 @@ C^{\mathrm{tot}}_3=\sum_{d,t}\left[\pi_tg^0_{d,t}+\pi_t(1.5u_{d,t}-0.5v_{d,t})+5
 
 \subsection{月度与典型日调度行为}
 
-图\ref{fig:q4-monthly-cost}显示四种策略在6、7和12月成本共同上升，与第5节月度净负荷高位一致；滚动策略在多数月份低于对应日前策略，但不是每一天都占优。固定价滚动方案逐日成本较日前方案降低198天、升高136天；波动价下分别为195天和139天，说明全年节约由大量大小不一的日差额累积，而不是逐日支配。
+图\ref{fig:q4-monthly-cost}显示四种策略在6、7和12月成本共同上升，与第5节月度净负荷高位一致；滚动策略在多数月份低于对应日前策略，但不是每一天都占优。固定价滚动方案逐日成本较日前方案降低198天、升高136天；波动价下分别为195天和139天，说明正式评价期的累计节约由大量大小不一的日差额累积，而不是逐日支配。
 
 \begin{figure}[htbp]
     \centering
@@ -862,12 +862,12 @@ C^{\mathrm{tot}}_3=\sum_{d,t}\left[\pi_tg^0_{d,t}+\pi_t(1.5u_{d,t}-0.5v_{d,t})+5
     \label{fig:q4-typical-day}
 \end{figure}
 
-总体成本图\ref{fig:q234-total-cost}把四个正式策略放在统一坐标中。固定价四时点滚动方案成本最低，波动价日前方案最高；但该排序同时受价格序列和可用预测信息影响，不能解释为某一种算法在任意市场机制下必然占优。
+正式评价期总成本图\ref{fig:q234-total-cost}把四个正式策略放在统一坐标中。固定价四时点滚动方案成本最低，波动价日前方案最高；但该排序同时受价格序列和可用预测信息影响，不能解释为某一种算法在任意市场机制下必然占优。
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.88\textwidth]{图21_不同问题与调度策略的全年总成本比较.png}
-    \caption{不同问题与调度策略的全年总成本比较}
+    \caption{不同问题与调度策略的正式评价期总成本比较}
     \label{fig:q234-total-cost}
 \end{figure}
 
@@ -967,7 +967,8 @@ C^{\mathrm{tot}}_3=\sum_{d,t}\left[\pi_tg^0_{d,t}+\pi_t(1.5u_{d,t}-0.5v_{d,t})+5
 
 综合而言，现有数据条件下可优先采用“动态净负荷日前计划+四时点滚动调整+跨日连续SOC”的策略，并把总成本而非单一预测误差或紧急购电量作为决策标准。同时应保留对预测精度、终端效应、价格可见性和极端天气的限定，避免把本次回测结果外推为无条件收益保证。
 
-本参赛队在竞赛过程中使用了 AI 工具，主要用于代码编写与调试、论文语言润色与翻译，详细使用情况见支撑材料
+\section{AI工具使用声明}
+本参赛队在竞赛过程中使用了 AI 工具，主要用于代码编写与调试、论文语言润色与翻译，详细使用情况见支撑材料。
 
 \begin{thebibliography}{99}
 \bibitem{economic2022}
